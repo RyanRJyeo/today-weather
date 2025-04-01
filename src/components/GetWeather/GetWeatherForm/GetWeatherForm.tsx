@@ -10,29 +10,41 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { logger } from '@/lib/logger';
+import {
+  GetWeatherValues,
+  WeatherFailureModel,
+  WeatherSuccessModel,
+  getWeatherSchema,
+} from '@/modules/Weather/WeatherModel';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
-const getWeatherSchema = z.object({
-  city: z.string().min(2, {
-    message: 'City must be at least 2 characters.',
-  }),
-  country: z.string().length(2, {
-    message: 'Country code must be 2 characters.',
-  }),
-});
-type GetWeatherValues = z.infer<typeof getWeatherSchema>;
-
-const GetWeatherForm: React.FC = () => {
+interface GetWeatherFormProps {
+  setWeather: (value: WeatherSuccessModel | WeatherFailureModel | null) => void;
+}
+const GetWeatherForm: React.FC<GetWeatherFormProps> = (props) => {
+  const { setWeather } = props;
   const form = useForm<GetWeatherValues>({
     resolver: zodResolver(getWeatherSchema),
     defaultValues: { city: '', country: '' },
   });
 
   const onSubmit = async (values: GetWeatherValues) => {
-    console.log({ values });
+    const response = await fetch(
+      `/api/weather?city=${values.city}&country=${values.country}`,
+      {
+        method: 'GET',
+      },
+    ).catch((err) => {
+      logger.error('error in create inventory', err);
+    });
+
+    if (response?.ok) {
+      const data = await response.json();
+      setWeather(data);
+    }
   };
 
   return (
