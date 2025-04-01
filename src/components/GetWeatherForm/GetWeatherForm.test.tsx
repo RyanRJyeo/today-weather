@@ -1,11 +1,11 @@
 import { MOCK_WEATHER_SUCCESS } from '@/lib/mocks';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { logger } from '../../../lib/logger';
+import { logger } from '../../lib/logger';
 import GetWeatherForm from './GetWeatherForm';
 
 // mock logger lib
-jest.mock('../../../lib/logger');
+jest.mock('../../lib/logger');
 
 // mock fetch API
 global.fetch = jest.fn();
