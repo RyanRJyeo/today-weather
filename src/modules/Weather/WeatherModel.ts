@@ -1,3 +1,19 @@
+import { z } from 'zod';
+
+export const getWeatherSchema = z.object({
+  city: z.string().min(2, {
+    message: 'City must be at least 2 characters.',
+  }),
+  country: z
+    .string()
+    .length(2, {
+      message: 'Country code must be 2 characters.',
+    })
+    .optional()
+    .or(z.literal('')),
+});
+export type GetWeatherValues = z.infer<typeof getWeatherSchema>;
+
 export type WeatherSuccessModel = {
   cod: number;
   coord: {
@@ -43,6 +59,6 @@ export type WeatherSuccessModel = {
 };
 
 export type WeatherFailureModel = {
-  cod: string;
+  cod: number;
   message: string;
 };

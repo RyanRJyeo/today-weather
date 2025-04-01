@@ -1,0 +1,1 @@
+export { getCityWeather } from './WeatherService';

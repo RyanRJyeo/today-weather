@@ -34,7 +34,7 @@ describe('GetWeatherResult', () => {
   } as WeatherSuccessModel;
 
   const mockErrorData = {
-    cod: '404',
+    cod: 404,
     message: 'City not found',
   } as WeatherFailureModel;
 
