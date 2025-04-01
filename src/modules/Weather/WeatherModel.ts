@@ -62,3 +62,14 @@ export type WeatherFailureModel = {
   cod: number;
   message: string;
 };
+
+export type WeatherDisplayModel = {
+  cod: number;
+  name?: string;
+  main?: string;
+  description?: string;
+  temperature?: string;
+  humidity?: string;
+  time?: string;
+  message?: string;
+};

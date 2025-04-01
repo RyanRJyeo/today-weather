@@ -1,4 +1,9 @@
-export const MOCK_WEATHER_SUCCESS = {
+import {
+  WeatherDisplayModel,
+  WeatherSuccessModel,
+} from '@/modules/Weather/WeatherModel';
+
+export const MOCK_WEATHER_SUCCESS: WeatherSuccessModel = {
   coord: {
     lon: -0.1257,
     lat: 51.5085,
@@ -42,4 +47,19 @@ export const MOCK_WEATHER_SUCCESS = {
   id: 2643743,
   name: 'London',
   cod: 200,
+};
+
+export const MOCK_WEATHER_DISPLAY_SUCCESS: WeatherDisplayModel = {
+  cod: 200,
+  name: 'London, GB',
+  main: 'Clear',
+  description: 'clear sky',
+  temperature: '284.82°C ~ 286.47°C',
+  humidity: '56%',
+  time: '2025-04-02, 1:16 AM',
+};
+
+export const MOCK_WEATHER_DISPLAY_FAILURE: WeatherDisplayModel = {
+  cod: 404,
+  message: 'City not found',
 };
