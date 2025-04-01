@@ -8,6 +8,9 @@ jest.mock('../../../components/GetWeatherForm', () => () => (
 jest.mock('../../../components/GetWeatherResult', () => () => (
   <div>Mocked GetWeatherResult</div>
 ));
+jest.mock('../../../components/SearchHistoryList', () => () => (
+  <div>Mocked SearchHistoryList</div>
+));
 
 describe('HomePage', () => {
   test("renders the Today's Weather section title and the mocked components", () => {
@@ -16,5 +19,12 @@ describe('HomePage', () => {
     expect(screen.getByText("Today's Weather")).toBeInTheDocument();
     expect(screen.getByText('Mocked GetWeatherForm')).toBeInTheDocument();
     expect(screen.getByText('Mocked GetWeatherResult')).toBeInTheDocument();
+  });
+
+  test('renders the Search History section title and the mocked components', () => {
+    render(<HomePage />);
+
+    expect(screen.getByText('Search History')).toBeInTheDocument();
+    expect(screen.getByText('Mocked SearchHistoryList')).toBeInTheDocument();
   });
 });

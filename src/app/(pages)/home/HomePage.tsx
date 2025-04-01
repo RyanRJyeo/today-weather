@@ -2,27 +2,29 @@
 
 import GetWeatherForm from '@/components/GetWeatherForm';
 import GetWeatherResult from '@/components/GetWeatherResult';
-import {
-  WeatherFailureModel,
-  WeatherSuccessModel,
-} from '@/modules/Weather/WeatherModel';
-import React, { useState } from 'react';
+import SearchHistoryList from '@/components/SearchHistoryList';
+import { DataProvider } from '@/contexts/Data/DataContext';
+import React from 'react';
 
 const HomePage: React.FC = () => {
-  const [weather, setWeather] = useState<
-    WeatherSuccessModel | WeatherFailureModel | null
-  >();
-
   return (
-    <div className="max-w-[1280px] m-auto p-4">
-      <div>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-5 first:mt-0">
-          Today's Weather
-        </h2>
-        <GetWeatherForm setWeather={setWeather} />
-        <GetWeatherResult results={weather} />
+    <DataProvider>
+      <div className="max-w-[1280px] m-auto p-4">
+        <div>
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-5 first:mt-0">
+            Today's Weather
+          </h2>
+          <GetWeatherForm />
+          <GetWeatherResult />
+        </div>
+        <div className="mt-10">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-5 first:mt-0">
+            Search History
+          </h2>
+          <SearchHistoryList />
+        </div>
       </div>
-    </div>
+    </DataProvider>
   );
 };
 
