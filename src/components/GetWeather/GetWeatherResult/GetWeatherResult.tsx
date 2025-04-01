@@ -35,7 +35,7 @@ const GetWeatherResult: React.FC<GetWeatherResultProps> = (props) => {
         Description: weatherResults.weather[0].description,
         Temperature: `${weatherResults.main.temp_min}°C ~ ${weatherResults.main.temp_max}°C`,
         Humidity: `${weatherResults.main.humidity}%`,
-        Time: formatDateTime(new Date())?.dateTime,
+        Time: formatDateTime(weatherResults.dt * 1000)?.dateTime,
       });
       setWeatherFailure(undefined);
     } else {

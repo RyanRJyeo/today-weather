@@ -4,7 +4,7 @@ interface FormatDateTimeResults {
   time: string;
 }
 
-export const formatDateTime = (input: string | Date): FormatDateTimeResults => {
+export const formatDateTime = (input: any): FormatDateTimeResults => {
   const date = new Date(input);
 
   // Check if the date is invalid
