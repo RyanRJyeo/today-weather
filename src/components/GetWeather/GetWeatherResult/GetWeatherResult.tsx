@@ -15,7 +15,7 @@ interface ResultTable {
   Time: string;
 }
 interface GetWeatherResultProps {
-  results: WeatherSuccessModel | WeatherFailureModel;
+  results?: WeatherSuccessModel | WeatherFailureModel | null;
 }
 const GetWeatherResult: React.FC<GetWeatherResultProps> = (props) => {
   const { results } = props;
