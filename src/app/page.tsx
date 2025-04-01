@@ -1,3 +1,1 @@
-export default function Home() {
-  return <div>HomePage</div>;
-}
+export { default } from './(pages)/home/HomePage';
