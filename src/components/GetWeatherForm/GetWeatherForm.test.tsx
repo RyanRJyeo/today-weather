@@ -1,3 +1,4 @@
+import { DataContext } from '@/contexts/Data/DataContext';
 import { MOCK_WEATHER_SUCCESS } from '@/lib/mocks';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -14,7 +15,11 @@ describe('GetWeatherForm', () => {
   const mockSetWeather = jest.fn();
 
   test('renders the form with all required elements', () => {
-    render(<GetWeatherForm setWeather={mockSetWeather} />);
+    render(
+      <DataContext.Provider value={{ setWeather: mockSetWeather }}>
+        <GetWeatherForm />
+      </DataContext.Provider>,
+    );
 
     // Check if all form elements are present
     expect(screen.getByLabelText(/city/i)).toBeInTheDocument();
@@ -24,7 +29,11 @@ describe('GetWeatherForm', () => {
   });
 
   test('shows validation errors if city input is not filled', async () => {
-    render(<GetWeatherForm setWeather={mockSetWeather} />);
+    render(
+      <DataContext.Provider value={{ setWeather: mockSetWeather }}>
+        <GetWeatherForm />
+      </DataContext.Provider>,
+    );
 
     // Try to submit empty form
     const searchButton = screen.getByRole('button', { name: /search/i });
@@ -37,7 +46,11 @@ describe('GetWeatherForm', () => {
   });
 
   test('shows validation errors if country input is not 2 characters', async () => {
-    render(<GetWeatherForm setWeather={mockSetWeather} />);
+    render(
+      <DataContext.Provider value={{ setWeather: mockSetWeather }}>
+        <GetWeatherForm />
+      </DataContext.Provider>,
+    );
 
     // Try to submit empty form
     const searchButton = screen.getByRole('button', { name: /search/i });
@@ -55,7 +68,11 @@ describe('GetWeatherForm', () => {
 
   test('submits form with fetch error', async () => {
     (global.fetch as jest.Mock).mockRejectedValueOnce('Test Error');
-    render(<GetWeatherForm setWeather={mockSetWeather} />);
+    render(
+      <DataContext.Provider value={{ setWeather: mockSetWeather }}>
+        <GetWeatherForm />
+      </DataContext.Provider>,
+    );
 
     // Fill in the form
     await userEvent.type(screen.getByLabelText(/city/i), 'London');
@@ -81,7 +98,11 @@ describe('GetWeatherForm', () => {
   test('submits form with valid data', async () => {
     const mockResponse = { ok: true, json: async () => MOCK_WEATHER_SUCCESS };
     (global.fetch as jest.Mock).mockResolvedValueOnce(mockResponse);
-    render(<GetWeatherForm setWeather={mockSetWeather} />);
+    render(
+      <DataContext.Provider value={{ setWeather: mockSetWeather }}>
+        <GetWeatherForm />
+      </DataContext.Provider>,
+    );
 
     // Fill in the form
     await userEvent.type(screen.getByLabelText(/city/i), 'London');
@@ -101,7 +122,11 @@ describe('GetWeatherForm', () => {
   });
 
   test('clears form when clear button is clicked', async () => {
-    render(<GetWeatherForm setWeather={mockSetWeather} />);
+    render(
+      <DataContext.Provider value={{ setWeather: mockSetWeather }}>
+        <GetWeatherForm />
+      </DataContext.Provider>,
+    );
 
     // Fill in the form
     const cityInput = screen.getByLabelText(/city/i);

@@ -10,22 +10,19 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useDataContext } from '@/contexts/Data/DataContext';
 import { logger } from '@/lib/logger';
 import {
   GetWeatherValues,
-  WeatherFailureModel,
-  WeatherSuccessModel,
   getWeatherSchema,
 } from '@/modules/Weather/WeatherModel';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-interface GetWeatherFormProps {
-  setWeather: (value: WeatherSuccessModel | WeatherFailureModel | null) => void;
-}
-const GetWeatherForm: React.FC<GetWeatherFormProps> = (props) => {
-  const { setWeather } = props;
+const GetWeatherForm: React.FC = () => {
+  const { setWeather } = useDataContext();
+
   const form = useForm<GetWeatherValues>({
     resolver: zodResolver(getWeatherSchema),
     defaultValues: { city: '', country: '' },
@@ -43,7 +40,7 @@ const GetWeatherForm: React.FC<GetWeatherFormProps> = (props) => {
 
     if (response?.ok) {
       const data = await response.json();
-      setWeather(data);
+      setWeather?.(data);
     }
   };
 
