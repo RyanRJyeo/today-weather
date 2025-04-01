@@ -1,4 +1,8 @@
 import { formatDateTime } from '@/lib/formatDateTime';
+import {
+  WeatherFailureModel,
+  WeatherSuccessModel,
+} from '@/modules/Weather/WeatherModel';
 import { render, screen } from '@testing-library/react';
 import GetWeatherResult from './GetWeatherResult';
 
@@ -27,12 +31,12 @@ describe('GetWeatherResult', () => {
       temp_max: 20,
       humidity: 65,
     },
-  };
+  } as WeatherSuccessModel;
 
   const mockErrorData = {
-    cod: 404,
+    cod: '404',
     message: 'City not found',
-  };
+  } as WeatherFailureModel;
 
   const mockDate = new Date('2024-04-01T12:00:00.000Z');
 
@@ -69,12 +73,7 @@ describe('GetWeatherResult', () => {
 
   it('renders error message when no data is found', () => {
     render(<GetWeatherResult results={mockErrorData} />);
-    expect(screen.getByText('Not Found')).toBeInTheDocument();
-  });
-
-  it('renders error message when results is undefined', () => {
-    render(<GetWeatherResult results={undefined} />);
-    expect(screen.getByText('Not Found')).toBeInTheDocument();
+    expect(screen.getByText('City not found')).toBeInTheDocument();
   });
 
   it('calls formatDateTime with mocked date', () => {

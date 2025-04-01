@@ -2,6 +2,10 @@
 
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { formatDateTime } from '@/lib/formatDateTime';
+import {
+  WeatherFailureModel,
+  WeatherSuccessModel,
+} from '@/modules/Weather/WeatherModel';
 import React, { useEffect, useState } from 'react';
 
 interface ResultTable {
@@ -11,34 +15,45 @@ interface ResultTable {
   Time: string;
 }
 interface GetWeatherResultProps {
-  results: any;
+  results: WeatherSuccessModel | WeatherFailureModel;
 }
 const GetWeatherResult: React.FC<GetWeatherResultProps> = (props) => {
   const { results } = props;
   const [resultTable, setResultTable] = useState<ResultTable | undefined>();
+  const [weatherSuccess, setWeatherSuccess] = useState<
+    WeatherSuccessModel | undefined
+  >();
+  const [weatherFailure, setWeatherFailure] = useState<
+    WeatherFailureModel | undefined
+  >();
 
   useEffect(() => {
     if (results?.cod === 200) {
+      const weatherResults = results as WeatherSuccessModel;
+      setWeatherSuccess(weatherResults);
       setResultTable({
-        Description: results.weather[0].description,
-        Temperature: `${results.main.temp_min}°C ~ ${results.main.temp_max}°C`,
-        Humidity: `${results.main.humidity}%`,
+        Description: weatherResults.weather[0].description,
+        Temperature: `${weatherResults.main.temp_min}°C ~ ${weatherResults.main.temp_max}°C`,
+        Humidity: `${weatherResults.main.humidity}%`,
         Time: formatDateTime(new Date())?.dateTime,
       });
+      setWeatherFailure(undefined);
     } else {
+      setWeatherSuccess(undefined);
       setResultTable(undefined);
+      setWeatherFailure(results as WeatherFailureModel);
     }
   }, [results]);
 
   return (
     <div className="mt-7">
-      {results?.cod === 200 && resultTable ? (
+      {weatherSuccess && resultTable && (
         <div>
           <p className="text-muted-foreground">
-            {results.name}, {results.sys.country}
+            {weatherSuccess.name}, {weatherSuccess.sys.country}
           </p>
           <h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
-            {results.weather[0].main}
+            {weatherSuccess.weather[0].main}
           </h1>
 
           <Table className="w-fit min-w-[346px] mt-4">
@@ -58,9 +73,10 @@ const GetWeatherResult: React.FC<GetWeatherResultProps> = (props) => {
             </TableBody>
           </Table>
         </div>
-      ) : (
+      )}
+      {weatherFailure && (
         <div className="w-full bg-red-300 border-red-800 border-solid border-2 py-1 px-2">
-          Not Found
+          {weatherFailure.message}
         </div>
       )}
     </div>
