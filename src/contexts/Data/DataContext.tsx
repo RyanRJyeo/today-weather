@@ -19,6 +19,7 @@ interface DataContextInterface {
   weather?: WeatherDisplayModel;
   setWeather?: (value: WeatherType) => void;
   searchHistory?: SearchHistory[];
+  removeSearch?: (value: string) => void;
 }
 
 export const DataContext = createContext<DataContextInterface | null>(null);
@@ -75,8 +76,20 @@ export const DataProvider = ({ children }: DataProviderProps) => {
     }
   };
 
+  const removeSearch = (key: string) => {
+    const nextWeatherList = searchHistory
+      ? searchHistory?.filter((item) => item.key !== key)
+      : [];
+    setSearchHistory(nextWeatherList);
+  };
+
   const value = useMemo(
-    () => ({ weather, setWeather: setFormattedWeather, searchHistory }),
+    () => ({
+      weather,
+      setWeather: setFormattedWeather,
+      searchHistory,
+      removeSearch,
+    }),
     [weather, searchHistory],
   );
 
