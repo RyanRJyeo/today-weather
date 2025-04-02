@@ -9,20 +9,18 @@ import React from 'react';
 const HomePage: React.FC = () => {
   return (
     <DataProvider>
-      <div className="max-w-[980px] m-auto p-4">
-        <div>
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-5 first:mt-0">
-            Today's Weather
-          </h2>
-          <GetWeatherForm />
-          <GetWeatherResult />
-        </div>
-        <div className="mt-10 p-4 rounded-s-lg rounded-e-lg bg-gradient-to-b from-primary/20 to-background">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-5 first:mt-0">
-            Search History
-          </h2>
-          <SearchHistoryList />
-        </div>
+      <div>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-5 first:mt-0">
+          Today's Weather
+        </h2>
+        <GetWeatherForm />
+        <GetWeatherResult />
+      </div>
+      <div className="mt-10 p-4 rounded-s-lg rounded-e-lg bg-gradient-to-b from-primary/20 to-background">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-5 first:mt-0">
+          Search History
+        </h2>
+        <SearchHistoryList />
       </div>
     </DataProvider>
   );
