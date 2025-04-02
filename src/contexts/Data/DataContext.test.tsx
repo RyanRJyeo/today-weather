@@ -1,5 +1,5 @@
 import { MOCK_WEATHER_SUCCESS } from '@/lib/mocks';
-import { SearchHistory } from '@/modules/Weather/SearchHistory/SearchHistoryModel';
+import { SearchHistory } from '@/modules/SearchHistory/SearchHistoryModel';
 import {
   GetWeatherValues,
   WeatherFailureModel,

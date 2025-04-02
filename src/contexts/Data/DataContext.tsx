@@ -2,7 +2,7 @@
 
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { formatDateTime } from '@/lib/formatDateTime';
-import { SearchHistory } from '@/modules/Weather/SearchHistory/SearchHistoryModel';
+import { SearchHistory } from '@/modules/SearchHistory/SearchHistoryModel';
 import {
   GetWeatherValues,
   WeatherDisplayModel,

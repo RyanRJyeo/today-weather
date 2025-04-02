@@ -1,4 +1,4 @@
-import { SearchHistory } from '@/modules/Weather/SearchHistory/SearchHistoryModel';
+import { SearchHistory } from '@/modules/SearchHistory/SearchHistoryModel';
 import {
   WeatherDisplayModel,
   WeatherSuccessModel,
