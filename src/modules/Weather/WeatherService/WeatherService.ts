@@ -1,9 +1,13 @@
 import { logger } from '@/lib/logger';
+import getConfig from 'next/config';
 import {
   GetWeatherValues,
   WeatherFailureModel,
   WeatherSuccessModel,
 } from '../WeatherModel';
+
+const { publicRuntimeConfig } = getConfig();
+const { appid } = publicRuntimeConfig || {};
 
 export const getCityWeather = async (
   params: GetWeatherValues,
@@ -17,7 +21,7 @@ export const getCityWeather = async (
 
     const query = country ? `${city},${country}` : city;
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=bd5e378503939ddaee76f12ad7a97608`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${appid}`,
       {
         method: 'GET',
       },

@@ -5,6 +5,11 @@ import { getCityWeather } from './WeatherService';
 // mock logger lib
 jest.mock('../../../lib/logger');
 
+// mock get nextjs configs
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: { appid: 'my_test_id' },
+}));
+
 // mock fetch API
 global.fetch = jest.fn();
 
@@ -33,7 +38,7 @@ describe('WeatherService', () => {
       expect(res).toBeNull();
       expect(global.fetch).toHaveBeenCalledTimes(1);
       expect(global.fetch).toHaveBeenCalledWith(
-        'https://api.openweathermap.org/data/2.5/weather?q=Dubai&appid=bd5e378503939ddaee76f12ad7a97608',
+        'https://api.openweathermap.org/data/2.5/weather?q=Dubai&appid=my_test_id',
         { method: 'GET' },
       );
       expect(logger.error).toHaveBeenCalledWith(
@@ -51,7 +56,7 @@ describe('WeatherService', () => {
       expect(res).toStrictEqual(MOCK_WEATHER_SUCCESS);
       expect(global.fetch).toHaveBeenCalledTimes(1);
       expect(global.fetch).toHaveBeenCalledWith(
-        'https://api.openweathermap.org/data/2.5/weather?q=London&appid=bd5e378503939ddaee76f12ad7a97608',
+        'https://api.openweathermap.org/data/2.5/weather?q=London&appid=my_test_id',
         { method: 'GET' },
       );
     });
@@ -66,7 +71,7 @@ describe('WeatherService', () => {
       expect(res).toStrictEqual(MOCK_WEATHER_SUCCESS);
       expect(global.fetch).toHaveBeenCalledTimes(1);
       expect(global.fetch).toHaveBeenCalledWith(
-        'https://api.openweathermap.org/data/2.5/weather?q=London,GB&appid=bd5e378503939ddaee76f12ad7a97608',
+        'https://api.openweathermap.org/data/2.5/weather?q=London,GB&appid=my_test_id',
         { method: 'GET' },
       );
     });
@@ -80,7 +85,7 @@ describe('WeatherService', () => {
       expect(res).toStrictEqual({ cod: 404, message: 'Not Found' });
       expect(global.fetch).toHaveBeenCalledTimes(1);
       expect(global.fetch).toHaveBeenCalledWith(
-        'https://api.openweathermap.org/data/2.5/weather?q=London&appid=bd5e378503939ddaee76f12ad7a97608',
+        'https://api.openweathermap.org/data/2.5/weather?q=London&appid=my_test_id',
         { method: 'GET' },
       );
     });
