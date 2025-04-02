@@ -1,3 +1,4 @@
+import { SearchHistory } from '@/modules/Weather/SearchHistory/SearchHistoryModel';
 import {
   WeatherDisplayModel,
   WeatherSuccessModel,
@@ -63,3 +64,8 @@ export const MOCK_WEATHER_DISPLAY_FAILURE: WeatherDisplayModel = {
   cod: 404,
   message: 'City not found',
 };
+
+export const MOCK_SEARCH_HISTORY_LIST: SearchHistory[] = [
+  { key: 'London, GB', time: '10:08:00 AM', city: 'London', country: 'GB' },
+  { key: 'New York, US', time: '02:08:00 PM', city: 'New York', country: 'US' },
+];

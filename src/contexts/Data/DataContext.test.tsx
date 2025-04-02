@@ -123,7 +123,7 @@ describe('DataContext', () => {
     });
 
     const weatherElement = screen.getByTestId('weather');
-    const weatherData = JSON.parse(weatherElement.textContent || '{}');
+    const weatherData = JSON.parse(weatherElement.textContent ?? '{}');
 
     expect(weatherData).toEqual({
       cod: 200,
@@ -158,7 +158,7 @@ describe('DataContext', () => {
     });
 
     const weatherElement = screen.getByTestId('weather');
-    const weatherData = JSON.parse(weatherElement.textContent || '{}');
+    const weatherData = JSON.parse(weatherElement.textContent ?? '{}');
 
     expect(weatherData).toEqual({
       cod: 404,
@@ -229,12 +229,14 @@ describe('DataContext', () => {
     });
 
     const searchHistoryElement = screen.getByTestId('searchHistory');
-    const searchHistory = JSON.parse(searchHistoryElement.textContent || '[]');
+    const searchHistory = JSON.parse(searchHistoryElement.textContent ?? '[]');
 
     expect(searchHistory).toHaveLength(1);
     expect(searchHistory[0]).toEqual({
+      city: 'London',
+      country: 'GB',
       key: 'London, GB',
-      date: '2024-04-01 12:00:00',
+      time: '12:00:00 pm',
     });
   });
 });

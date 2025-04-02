@@ -1,4 +1,6 @@
 export type SearchHistory = {
   key: string;
-  date: string;
+  time: string;
+  city: string;
+  country: string;
 };

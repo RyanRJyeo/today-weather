@@ -54,7 +54,12 @@ export const DataProvider = ({ children }: DataProviderProps) => {
       });
 
       // update search history
-      const search = { key: name, date: dateTime };
+      const search: SearchHistory = {
+        key: name,
+        time: new Date(dateTime).toLocaleTimeString(),
+        city: successValue.name,
+        country: successValue.sys.country,
+      };
       if (searchHistory) {
         const nextWeatherList = searchHistory.filter(
           (item) => item.key !== search.key,
