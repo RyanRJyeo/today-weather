@@ -14,12 +14,14 @@ const SearchHistoryList: React.FC = () => {
       {searchHistory?.length ? (
         <Table className="min-w-[346px]">
           <TableBody>
-            {searchHistory.map((item) => {
+            {searchHistory.map((item, index) => {
               const { key, time, city, country } = item;
 
               return (
                 <TableRow key={key}>
-                  <TableCell>{key}</TableCell>
+                  <TableCell>
+                    {index + 1}. {key}
+                  </TableCell>
                   <TableCell>
                     <span className="flex gap-2 items-center justify-end">
                       {time}

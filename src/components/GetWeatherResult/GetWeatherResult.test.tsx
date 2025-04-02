@@ -11,7 +11,7 @@ describe('GetWeatherResult', () => {
     jest.clearAllMocks();
   });
 
-  it('renders weather information correctly when data is available', () => {
+  test('renders weather information correctly when data is available', () => {
     render(
       <DataContext.Provider value={{ weather: MOCK_WEATHER_DISPLAY_SUCCESS }}>
         <GetWeatherResult />
@@ -31,7 +31,7 @@ describe('GetWeatherResult', () => {
     expect(screen.getByText('2025-04-02, 1:16 AM')).toBeInTheDocument();
   });
 
-  it('renders error message when no data is found', () => {
+  test('renders error message when no data is found', () => {
     render(
       <DataContext.Provider value={{ weather: MOCK_WEATHER_DISPLAY_FAILURE }}>
         <GetWeatherResult />

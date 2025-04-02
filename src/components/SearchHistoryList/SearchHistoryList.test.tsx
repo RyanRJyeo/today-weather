@@ -24,10 +24,10 @@ describe('SearchHistoryList', () => {
     );
 
     // Check if all search history items are rendered
-    for (const item of MOCK_SEARCH_HISTORY_LIST) {
-      expect(screen.getByText(item.key)).toBeInTheDocument();
+    MOCK_SEARCH_HISTORY_LIST.forEach((item, index) => {
+      expect(screen.getByText(`${index + 1}. ${item.key}`)).toBeInTheDocument();
       expect(screen.getByText(item.time)).toBeInTheDocument();
-    }
+    });
   });
 
   test('displays "No Record" when search history is empty', () => {

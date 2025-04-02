@@ -27,7 +27,7 @@ const GetWeatherResult: React.FC = () => {
                 const [key, value] = item;
 
                 return (
-                  <TableRow key={key}>
+                  <TableRow key={key} className="border-none">
                     <TableCell className="w-fit p-1 pr-5 text-muted-foreground">
                       {key}:
                     </TableCell>
