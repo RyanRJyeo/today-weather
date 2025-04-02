@@ -27,7 +27,6 @@ const SearchHistoryList: React.FC = () => {
                       {time}
                       <Button
                         aria-label={`search-${key}`}
-                        variant="outline"
                         size="icon"
                         onClick={() => setSearchValues?.({ city, country })}
                       >
@@ -35,7 +34,7 @@ const SearchHistoryList: React.FC = () => {
                       </Button>
                       <Button
                         aria-label={`delete-${key}`}
-                        variant="outline"
+                        variant="secondary"
                         size="icon"
                         onClick={() => removeSearch?.(key)}
                       >
@@ -49,7 +48,7 @@ const SearchHistoryList: React.FC = () => {
           </TableBody>
         </Table>
       ) : (
-        <div>No Record</div>
+        <div className="text-center text-muted-foreground">No Record</div>
       )}
     </div>
   );

@@ -12,7 +12,7 @@ const GetWeatherResult: React.FC = () => {
       {weather?.cod === 200 && (
         <div>
           <p className="text-muted-foreground">{weather.name}</p>
-          <h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
+          <h1 className="scroll-m-20 text-4xl font-bold tracking-tight text-primary lg:text-5xl">
             {weather.main}
           </h1>
 
@@ -40,7 +40,7 @@ const GetWeatherResult: React.FC = () => {
         </div>
       )}
       {weather && weather.cod !== 200 && (
-        <div className="w-full bg-red-300 border-red-800 border-solid border-2 py-1 px-2">
+        <div className="w-full bg-red-200 border-red-400 rounded-lg border-solid text-black border-2 py-1 px-2">
           {weather.message}
         </div>
       )}

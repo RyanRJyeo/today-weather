@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
           <GetWeatherForm />
           <GetWeatherResult />
         </div>
-        <div className="mt-10">
+        <div className="mt-10 p-4 rounded-s-lg rounded-e-lg bg-gradient-to-b from-primary/20 to-background">
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-5 first:mt-0">
             Search History
           </h2>

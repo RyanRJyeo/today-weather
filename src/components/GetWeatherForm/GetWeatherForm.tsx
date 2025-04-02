@@ -17,6 +17,7 @@ import {
   getWeatherSchema,
 } from '@/modules/Weather/WeatherModel';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { SendHorizontal, X } from 'lucide-react';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -55,7 +56,7 @@ const GetWeatherForm: React.FC = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-[1280px] flex flex-col gap-8 sm:flex-row sm:items-center"
+        className="max-w-[1280px] flex flex-col gap-8 sm:flex-row sm:items-start"
       >
         <div className="flex flex-col gap-4 sm:flex-row">
           <FormField
@@ -90,15 +91,16 @@ const GetWeatherForm: React.FC = () => {
           />
         </div>
         <div className="flex gap-2">
-          <Button size="sm" type="submit">
-            Search
+          <Button aria-label="search" size="icon" type="submit">
+            <SendHorizontal />
           </Button>
           <Button
-            size="sm"
-            variant="ghost"
+            aria-label="clear"
+            size="icon"
+            variant="secondary"
             onClick={() => form.reset(defaultValues)}
           >
-            Clear
+            <X />
           </Button>
         </div>
       </form>
