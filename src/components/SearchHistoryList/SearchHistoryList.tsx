@@ -1,6 +1,6 @@
 'use client';
 
-import { useDataContext } from '@/contexts/Data/DataContext';
+import { useDataContext } from '@/contexts/Data';
 import { Search, Trash2 } from 'lucide-react';
 import React from 'react';
 import { Button } from '../ui/button';

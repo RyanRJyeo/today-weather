@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useDataContext } from '@/contexts/Data/DataContext';
+import { useDataContext } from '@/contexts/Data';
 import { logger } from '@/lib/logger';
 import {
   GetWeatherValues,

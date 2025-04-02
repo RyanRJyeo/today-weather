@@ -1,4 +1,4 @@
-import { DataContext } from '@/contexts/Data/DataContext';
+import { DataContext } from '@/contexts/Data';
 import { MOCK_SEARCH_HISTORY_LIST } from '@/lib/mocks';
 import { fireEvent, render, screen } from '@testing-library/react';
 import SearchHistoryList from './SearchHistoryList';

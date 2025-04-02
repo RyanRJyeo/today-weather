@@ -1,4 +1,4 @@
-import { DataContext } from '@/contexts/Data/DataContext';
+import { DataContext } from '@/contexts/Data';
 import {
   MOCK_WEATHER_DISPLAY_FAILURE,
   MOCK_WEATHER_DISPLAY_SUCCESS,

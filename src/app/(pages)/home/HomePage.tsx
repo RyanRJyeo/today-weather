@@ -3,7 +3,7 @@
 import GetWeatherForm from '@/components/GetWeatherForm';
 import GetWeatherResult from '@/components/GetWeatherResult';
 import SearchHistoryList from '@/components/SearchHistoryList';
-import { DataProvider } from '@/contexts/Data/DataContext';
+import { DataProvider } from '@/contexts/Data';
 import React from 'react';
 
 const HomePage: React.FC = () => {

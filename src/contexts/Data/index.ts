@@ -1,1 +1,1 @@
-export { AuthProvider, AuthContext, useAuthContext } from './DataContext';
+export { DataProvider, DataContext, useDataContext } from './DataContext';

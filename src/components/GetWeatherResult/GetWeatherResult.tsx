@@ -1,7 +1,7 @@
 'use client';
 
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
-import { useDataContext } from '@/contexts/Data/DataContext';
+import { useDataContext } from '@/contexts/Data';
 import React from 'react';
 
 const GetWeatherResult: React.FC = () => {
