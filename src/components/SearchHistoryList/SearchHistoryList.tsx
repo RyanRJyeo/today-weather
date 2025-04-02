@@ -7,7 +7,7 @@ import { Button } from '../ui/button';
 import { Table, TableBody, TableCell, TableRow } from '../ui/table';
 
 const SearchHistoryList: React.FC = () => {
-  const { searchHistory, removeSearch } = useDataContext();
+  const { searchHistory, setSearchValues, removeSearch } = useDataContext();
 
   return (
     <div>
@@ -15,7 +15,7 @@ const SearchHistoryList: React.FC = () => {
         <Table className="min-w-[346px]">
           <TableBody>
             {searchHistory.map((item) => {
-              const { key, time } = item;
+              const { key, time, city, country } = item;
 
               return (
                 <TableRow key={key}>
@@ -23,7 +23,12 @@ const SearchHistoryList: React.FC = () => {
                   <TableCell>
                     <span className="flex gap-2 items-center justify-end">
                       {time}
-                      <Button variant="outline" size="icon">
+                      <Button
+                        aria-label={`search-${key}`}
+                        variant="outline"
+                        size="icon"
+                        onClick={() => setSearchValues?.({ city, country })}
+                      >
                         <Search />
                       </Button>
                       <Button

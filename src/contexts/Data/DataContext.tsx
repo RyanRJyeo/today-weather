@@ -4,6 +4,7 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { formatDateTime } from '@/lib/formatDateTime';
 import { SearchHistory } from '@/modules/Weather/SearchHistory/SearchHistoryModel';
 import {
+  GetWeatherValues,
   WeatherDisplayModel,
   WeatherFailureModel,
   WeatherSuccessModel,
@@ -20,6 +21,8 @@ interface DataContextInterface {
   setWeather?: (value: WeatherType) => void;
   searchHistory?: SearchHistory[];
   removeSearch?: (value: string) => void;
+  searchValues?: GetWeatherValues;
+  setSearchValues?: (value: GetWeatherValues) => void;
 }
 
 export const DataContext = createContext<DataContextInterface | null>(null);
@@ -32,6 +35,7 @@ interface DataProviderProps {
 }
 export const DataProvider = ({ children }: DataProviderProps) => {
   const [weather, setWeather] = useState<WeatherDisplayModel>();
+  const [searchValues, setSearchValues] = useState<GetWeatherValues>();
 
   // localStorage states
   const [searchHistory, setSearchHistory] =
@@ -89,8 +93,10 @@ export const DataProvider = ({ children }: DataProviderProps) => {
       setWeather: setFormattedWeather,
       searchHistory,
       removeSearch,
+      searchValues,
+      setSearchValues,
     }),
-    [weather, searchHistory],
+    [weather, searchHistory, searchValues],
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

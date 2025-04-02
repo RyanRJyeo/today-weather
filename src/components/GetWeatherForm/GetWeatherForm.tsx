@@ -17,16 +17,23 @@ import {
   getWeatherSchema,
 } from '@/modules/Weather/WeatherModel';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
+const defaultValues = { city: '', country: '' };
 const GetWeatherForm: React.FC = () => {
-  const { setWeather } = useDataContext();
+  const { searchValues, setWeather } = useDataContext();
 
   const form = useForm<GetWeatherValues>({
     resolver: zodResolver(getWeatherSchema),
-    defaultValues: { city: '', country: '' },
+    defaultValues,
   });
+
+  useEffect(() => {
+    if (searchValues) {
+      form.reset(searchValues);
+    }
+  }, [searchValues]);
 
   const onSubmit = async (values: GetWeatherValues) => {
     const response = await fetch(
@@ -86,7 +93,11 @@ const GetWeatherForm: React.FC = () => {
           <Button size="sm" type="submit">
             Search
           </Button>
-          <Button size="sm" variant="ghost" onClick={() => form.reset()}>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => form.reset(defaultValues)}
+          >
             Clear
           </Button>
         </div>

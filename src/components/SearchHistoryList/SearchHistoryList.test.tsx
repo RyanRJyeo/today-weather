@@ -4,9 +4,11 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import SearchHistoryList from './SearchHistoryList';
 
 const mockRemoveSearch = jest.fn();
+const mockSetSearchValues = jest.fn();
 const mockContextValue = {
   searchHistory: MOCK_SEARCH_HISTORY_LIST,
   removeSearch: mockRemoveSearch,
+  setSearchValues: mockSetSearchValues,
 };
 
 const mockEmptyContextValue = {
@@ -67,5 +69,26 @@ describe('SearchHistoryList', () => {
 
     expect(mockRemoveSearch).toHaveBeenCalledTimes(1);
     expect(mockRemoveSearch).toHaveBeenCalledWith('New York, US');
+  });
+
+  test('mockSetSearchValues is called when the search button is clicked', () => {
+    render(
+      <DataContext.Provider value={mockContextValue}>
+        <SearchHistoryList />
+      </DataContext.Provider>,
+    );
+
+    const searchButton = screen.getByRole('button', {
+      name: 'search-New York, US',
+    });
+    expect(searchButton).toBeInTheDocument();
+
+    fireEvent.click(searchButton);
+
+    expect(mockSetSearchValues).toHaveBeenCalledTimes(1);
+    expect(mockSetSearchValues).toHaveBeenCalledWith({
+      city: 'New York',
+      country: 'US',
+    });
   });
 });

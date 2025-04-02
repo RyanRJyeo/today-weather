@@ -143,4 +143,20 @@ describe('GetWeatherForm', () => {
     expect(cityInput).toHaveValue('');
     expect(countryInput).toHaveValue('');
   });
+
+  test('renders the form with prefilled inputs if searchValues is given', () => {
+    render(
+      <DataContext.Provider
+        value={{
+          setWeather: mockSetWeather,
+          searchValues: { city: 'New York', country: 'US' },
+        }}
+      >
+        <GetWeatherForm />
+      </DataContext.Provider>,
+    );
+
+    expect(screen.getByLabelText(/city/i)).toHaveValue('New York');
+    expect(screen.getByLabelText(/country/i)).toHaveValue('US');
+  });
 });

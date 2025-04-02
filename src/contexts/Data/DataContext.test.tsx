@@ -1,6 +1,9 @@
 import { MOCK_WEATHER_SUCCESS } from '@/lib/mocks';
 import { SearchHistory } from '@/modules/Weather/SearchHistory/SearchHistoryModel';
-import { WeatherFailureModel } from '@/modules/Weather/WeatherModel';
+import {
+  GetWeatherValues,
+  WeatherFailureModel,
+} from '@/modules/Weather/WeatherModel';
 import { act, render, screen } from '@testing-library/react';
 import React from 'react';
 import { DataProvider, useDataContext } from './DataContext';
@@ -39,6 +42,9 @@ const TestComponent = ({
       <div data-testid="weather">{JSON.stringify(context.weather)}</div>
       <div data-testid="searchHistory">
         {JSON.stringify(context.searchHistory)}
+      </div>
+      <div data-testid="searchValues">
+        {JSON.stringify(context.searchValues)}
       </div>
     </div>
   );
@@ -188,5 +194,39 @@ describe('DataContext', () => {
     );
 
     expect(nextSearchHistory).toHaveLength(0);
+  });
+
+  test('set search values', () => {
+    let contextValue: any;
+    render(
+      <DataProvider>
+        <TestComponent
+          onContextReady={(context) => {
+            contextValue = context;
+          }}
+        />
+      </DataProvider>,
+    );
+
+    const searchValuesElement = screen.getByTestId('searchValues');
+    const text: any =
+      searchValuesElement.textContent === ''
+        ? '{}'
+        : searchValuesElement.textContent;
+    const searchValues: GetWeatherValues = JSON.parse(text);
+
+    expect(searchValues).toStrictEqual({});
+
+    // remove search history
+    act(() => {
+      contextValue.setSearchValues?.({ city: 'London', country: 'GB' });
+    });
+
+    const nextSearchValuesElement = screen.getByTestId('searchValues');
+    const nextSearchValues: SearchHistory[] = JSON.parse(
+      nextSearchValuesElement.textContent ?? '{}',
+    );
+
+    expect(nextSearchValues).toStrictEqual({ city: 'London', country: 'GB' });
   });
 });
