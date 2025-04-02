@@ -1,3 +1,5 @@
+import ThemeSwitcher from '@/components/ThemeSwitcher';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 import { APP_DESCRIPTION, APP_TITLE } from '@/lib/constants';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
@@ -32,7 +34,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <div className="absolute top-2 right-2">
+            <ThemeSwitcher />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
